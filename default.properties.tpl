@@ -59,7 +59,7 @@ domainPassword = ${DOMAIN_PASSWORD}
     
 # The log level for the agent log output. Valid levels are, from most to least 
 # verbose: ALL, FINEST, FINER, FINE, CONFIG, INFO, WARNING, SEVERE, OFF
-#log = INFO
+log = ${LOG_LEVEL}
 
 # The location of the directory with the 'nuodb' executable, which is typically
 # the same as the directory where the nuoagent.jar file is found

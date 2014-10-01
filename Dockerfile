@@ -37,6 +37,7 @@ ENV DBA_PASSWORD bird
 ENV DATABASE_NAME testdb
 ENV AUTOMATION true
 ENV AUTOMATION_BOOTSTRAP true
+ENV LOG_LEVEL INFO
 
 # Define working directory.
 WORKDIR /opt/nuodb
@@ -45,6 +46,8 @@ CMD /run.sh
 
 # Broker
 EXPOSE 48004
+EXPOSE 48005
+EXPOSE 48006
 # Webconsole
 EXPOSE 8080
 # Autoconsole

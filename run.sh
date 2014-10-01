@@ -37,14 +37,7 @@ if [ -f /nuodb-override/default.properties ]; then
     cp /nuodb-override/default.properties /opt/nuodb/etc/default.properties.tpl
 fi
 rm -f /opt/nuodb/etc/default.properties 
-while read line
-do
-    new_line=$(eval echo "$line")
-    if [[ -z $new_line ]]; then
-        new_line="$line"
-    fi
-    echo "$new_line" >> /opt/nuodb/etc/default.properties
-done < "/opt/nuodb/etc/default.properties.tpl"
+envsubst < "/opt/nuodb/etc/default.properties.tpl" > "/opt/nuodb/etc/default.properties" 
 chown nuodb:nuodb /opt/nuodb/etc/default.properties
 
 start_nuoagent

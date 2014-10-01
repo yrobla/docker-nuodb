@@ -20,7 +20,7 @@ The first time that you run your container, check the logs of the container by r
 
 You will see an output like the following:
 
-    ==========================================================================================
+    ========================================================================================
     You can now connect to this Nuodb Server:
 
         domain:
@@ -42,7 +42,7 @@ You will see an output like the following:
         [webconsole] localhost:8080
         [autoconsole] localhost:8888
         [autoconsole-admin] localhost:8889
-    ==========================================================================================
+    ========================================================================================
 
 Done!
 

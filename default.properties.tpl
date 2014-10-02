@@ -37,7 +37,7 @@ domain = ${DOMAIN_USER}
 domainPassword = ${DOMAIN_PASSWORD}
 
 # The port that this agent listens on for all incoming connections
-#port = 48004
+port = 48004
 
 # An existing peer (agent or broker) already running in the domain that this
 # agent should connect to on startup to extend the running domain.
@@ -46,12 +46,12 @@ domainPassword = ${DOMAIN_PASSWORD}
 
 # An alternate address to use in identifying this host, which is not actually
 # advertised unless the advertiseAlt property is set.
-#altAddr = 
+altAddr = ${BROKER_ALT_ADDR}
 
 # A flag specifying whether the alternate address should be advertised instead
 # of the locally observed network addresses. This is only meaningful for
 # brokers, because only brokers advertise addresses to clients and admins.
-#advertiseAlt = false
+advertiseAlt = true
 
 # The region for this host. The region of a host should not be changed after it
 # has been set.

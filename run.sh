@@ -5,6 +5,9 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+DEFAULT_ROUTE=$(/sbin/ip route | awk '/default/ { print $3 }')
+BROKER_ALT_ADDR=${BROKER_ALT_ADDR:-$DEFAULT_ROUTE}
+
 start_nuoagent() {
     sudo -u nuodb /bin/bash -c "SHELL=/bin/bash java -jar /opt/nuodb/jar/nuoagent.jar --broker > /dev/null 2>&1 &"
     STATUS=1
@@ -44,10 +47,14 @@ start_nuoagent
 
 echo "=> Starting configuration"
 echo -e "\t=> Create sm process from database $DATABASE_NAME"
-/opt/nuodb/bin/nuodbmgr --broker localhost --user $DOMAIN_USER --password ${DOMAIN_PASSWORD:-$RAND_DOMAIN_PASSWORD} --command "start process sm host localhost database $DATABASE_NAME archive /opt/nuodb/data/$DATABASE_NAME initialize true" &>/dev/null
+INIT_ARCHIVE=true
+if [ -f /opt/nuodb/data/$DATABASE_NAME/.init ]; then
+    INIT_ARCHIVE=false
+fi
+/opt/nuodb/bin/nuodbmgr --broker localhost --user $DOMAIN_USER --password ${DOMAIN_PASSWORD:-$RAND_DOMAIN_PASSWORD} --command "start process sm host $BROKER_ALT_ADDR database $DATABASE_NAME archive /opt/nuodb/data/$DATABASE_NAME initialize $INIT_ARCHIVE" &>/dev/null
+touch /opt/nuodb/data/$DATABASE_NAME/.init
 echo -e "\t=> Create te process from database $DATABASE_NAME"
-/opt/nuodb/bin/nuodbmgr --broker localhost --user $DOMAIN_USER --password ${DOMAIN_PASSWORD:-$RAND_DOMAIN_PASSWORD} --command "start process te host localhost database $DATABASE_NAME options '--dba-user $DBA_USER --dba-password ${DBA_PASSWORD:-$RAND_DBA_PASSWORD} --verbose info,warn,error'" &>/dev/null
-    
+/opt/nuodb/bin/nuodbmgr --broker localhost --user $DOMAIN_USER --password ${DOMAIN_PASSWORD:-$RAND_DOMAIN_PASSWORD} --command "start process te host $BROKER_ALT_ADDR database $DATABASE_NAME options '--dba-user $DBA_USER --dba-password ${DBA_PASSWORD:-$RAND_DBA_PASSWORD} --verbose info,warn,error'" &>/dev/null
 if [ -n "$LICENSE" ]; then
     echo -e "\t=> Install nuodb license"
     echo $LICENSE > /license.file

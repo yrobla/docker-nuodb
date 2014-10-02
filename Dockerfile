@@ -48,6 +48,9 @@ CMD /run.sh
 EXPOSE 48004
 EXPOSE 48005
 EXPOSE 48006
+# For admin database
+EXPOSE 48007
+EXPOSE 48008
 # Webconsole
 EXPOSE 8080
 # Autoconsole

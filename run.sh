@@ -89,4 +89,4 @@ echo "    [autoconsole-admin] localhost:8889"
 echo "=========================================================================================="
 echo ""
 
-supervisord -n
+supervisord -n -e $LOG_LEVEL

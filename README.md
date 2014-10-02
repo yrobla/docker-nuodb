@@ -75,7 +75,7 @@ Configuration
 
 You could override nuodb `default.properties` by using mounting volume:
 
-    docker run -d -p 48004:48004 -p 8080:8080 -p 8888:8888 -p 8889:8889 -v <override-dir>:/nuodb-override kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 8080:8080 -p 8888:8888 -p 8889:8889 -v <override-dir>:/nuodb-override kakawait/nuodb
 
 where <override-dir> is an absolute path of a directory that could contain:
 
@@ -97,10 +97,10 @@ Where <DOCKER_HOST_WITH_NUODBCONTAINER> is not local address (`localhost`, `127.
 
 Thus run container for above `jdbcUrl` like following:
 
-    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -e BROKER_ALT_ADDR=<DOCKER_HOST_WITH_NUODBCONTAINER> kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 8080:8080 -p 8888:8888 -p 8889:8889 -e BROKER_ALT_ADDR=<DOCKER_HOST_WITH_NUODBCONTAINER> kakawait/nuodb
 
 ### Mounting the database file volume
 
 In order to persist the database data, you can mount a local folder from the host on the container to store the database files. To do so:
 
-    docker run -d -p 48004:48004 -p 8080:8080 -p 8888:8888 -p 8889:8889 -v /path/in/host:/opt/nuodb/data kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 8080:8080 -p 8888:8888 -p 8889:8889 -v /path/in/host:/opt/nuodb/data kakawait/nuodb

@@ -6,7 +6,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 DEFAULT_ROUTE=$(/sbin/ip route | awk '/default/ { print $3 }')
-BROKER_ALT_ADDR=${BROKER_ALT_ADDR:-$DEFAULT_ROUTE}
+export BROKER_ALT_ADDR=${BROKER_ALT_ADDR:-$DEFAULT_ROUTE}
 
 start_nuoagent() {
     sudo -u nuodb /bin/bash -c "SHELL=/bin/bash java -jar /opt/nuodb/jar/nuoagent.jar --broker > /dev/null 2>&1 &"

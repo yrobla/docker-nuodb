@@ -28,21 +28,21 @@ Except if you set `AUTOMATION` to `false`
 Usage
 -----
 
-To create the image kakawait/nuodb, execute the following command:
+To create the image kakawait/nuodb-with-ecosystem, execute the following command:
 
-    docker build --rm -t kakawait/nuodb .
+    docker build --rm -t kakawait/nuodb-with-ecosystem .
 
 To run the image and bind to ports:
 
-    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 kakawait/nuodb-with-ecosystem
 
 ATTENTION if you are using boot2docker please use the following command (see section Configuration -> BROKER_ALT_ADDR for more information):
 
-    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -e BROKER_ALT_ADDR=<boot2docker ip> kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -e BROKER_ALT_ADDR=<boot2docker ip> kakawait/nuodb-with-ecosystem
 
 Where <boot2docker ip> can be retrieve using `boot2docker ip` command. On MacOsX you can run like following:
 
-    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -e BROKER_ALT_ADDR=$(boot2docker ip 2>/dev/null) kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -e BROKER_ALT_ADDR=$(boot2docker ip 2>/dev/null) kakawait/nuodb-with-ecosystem
 
 The first time that you run your container, check the logs of the container by running:
 
@@ -97,7 +97,7 @@ Configuration
 
 You could override nuodb `default.properties` by using mounting volume:
 
-    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -v <override-dir>:/nuodb-override kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -v <override-dir>:/nuodb-override kakawait/nuodb-with-ecosystem
 
 where <override-dir> is an absolute path of a directory that could contain:
 
@@ -119,10 +119,10 @@ Where <DOCKER_HOST_WITH_NUODBCONTAINER> is not local address (`localhost`, `127.
 
 Thus run container for above `jdbcUrl` like following:
 
-    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -e BROKER_ALT_ADDR=<DOCKER_HOST_WITH_NUODBCONTAINER> kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -e BROKER_ALT_ADDR=<DOCKER_HOST_WITH_NUODBCONTAINER> kakawait/nuodb-with-ecosystem
 
 ### Mounting the database file volume
 
 In order to persist the database data, you can mount a local folder from the host on the container to store the database files. To do so:
 
-    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -v /path/in/host:/opt/nuodb/data kakawait/nuodb
+    docker run -d -p 48004:48004 -p 48005:48005 -p 48006:48006 -p 48007:48007 -p 48008:48008 -p 8080:8080 -p 8888:8888 -v /path/in/host:/opt/nuodb/data kakawait/nuodb-with-ecosystem

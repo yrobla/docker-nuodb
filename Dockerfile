@@ -1,5 +1,5 @@
 FROM dockerfile/java:oracle-java7
-MAINTAINER kakawait <thibaud.lepretre@gmail.com>
+MAINTAINER Yolanda Robla <info@ysoft.biz>
 
 ### Install dependencies ###
 ENV DEBIAN_FRONTEND noninteractive

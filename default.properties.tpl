@@ -46,7 +46,7 @@ port = 48004
 
 # An alternate address to use in identifying this host, which is not actually
 # advertised unless the advertiseAlt property is set.
-altAddr = ${BROKER_ALT_ADDR}
+altAddr = ${HOST}
 
 # A flag specifying whether the alternate address should be advertised instead
 # of the locally observed network addresses. This is only meaningful for
@@ -98,7 +98,7 @@ enableHostStats = true
 # flag is true then a "connection key" is required of all nuodb instances. A
 # connection key is only available if the process was started through a request
 # on the agent. This is a good best-practice flag for locking down a system.
-#requireConnectKey = false
+requireConnectKey = true
 
 # A flag specifying the SQL connection load balancer that this broker should 
 # use. The balancer determines how the broker chooses to which TE a SQL 
@@ -154,3 +154,6 @@ singleHostDbRestart = true
 # of key=value pairs, with each string token being trimmed.
 # Example: hostTags = tag1 = val, tag2=v2  
 #hostTags =
+
+# the port for the webapp
+webapp.port = 48009

@@ -4,7 +4,7 @@ MAINTAINER Yolanda Robla <info@ysoft.biz>
 ### Install dependencies ###
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
-  apt-get -yq install pwgen supervisor && \
+  apt-get -yq install pwgen && \
   rm -rf /var/lib/apt/lists/*
 
 ### Install nuodb ###
@@ -23,26 +23,18 @@ RUN chown nuodb:nuodb /opt/nuodb/data
 # Add files
 ADD run.sh /run.sh
 ADD default.properties.tpl /opt/nuodb/etc/default.properties.tpl
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD webapp.properties.tpl /opt/nuodb/etc/webapp.properties.tpl
 
 RUN chmod +x /run.sh
 
 # Environment variables
 ENV NUODB_HOME /opt/nuodb
-ENV BROKER true
-ENV DOMAIN_USER domain
-ENV DOMAIN_PASSWORD bird
-ENV DBA_USER dba
-ENV DBA_PASSWORD bird
-ENV DATABASE_NAME testdb
 ENV AUTOMATION true
 ENV AUTOMATION_BOOTSTRAP true
 ENV LOG_LEVEL INFO
 
 # Define working directory.
 WORKDIR /opt/nuodb
-
-CMD /run.sh 
 
 # Broker
 EXPOSE 48004
@@ -52,8 +44,7 @@ EXPOSE 48006
 EXPOSE 48007
 EXPOSE 48008
 # Webconsole
-EXPOSE 8080
-# Autoconsole
-EXPOSE 8888
-EXPOSE 8889
+EXPOSE 48009
+
+CMD /run.sh 
 

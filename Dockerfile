@@ -8,22 +8,21 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 ### Install nuodb ###
-RUN wget -q -O /tmp/nuodb-2.0.4.linux.x64.deb "http://download.nuohub.org/nuodb-2.0.4.linux.x64.deb" && \
-    sudo -E bash -c "dpkg --install /tmp/nuodb-2.0.4.linux.x64.deb" && \
-    sudo rm /tmp/nuodb-2.0.4.linux.x64.deb
+RUN wget -q -O /tmp/nuodb_2.1.0.2.deb "http://download.nuohub.org/nuodb_2.1.0.2.deb" && \
+    sudo -E bash -c "dpkg --install /tmp/nuodb_2.1.0.2.deb" && \
+    sudo rm /tmp/nuodb_2.1.0.2.deb
 
 ### Setup ###
 # Mount volume
-RUN mkdir -p /opt/nuodb/data && \
-    mkdir -p /nuodb-override && \
-    chown nuodb:nuodb /opt/nuodb/data
-VOLUME ["/opt/nuodb/data", "/nuodb-override"]
-RUN chown nuodb:nuodb /opt/nuodb/data
+RUN mkdir -p /var/opt/nuodb/production-archives
+RUN chown nuodb:nuodb /var/opt/nuodb/production-archives
+VOLUME ["/var/opt/nuodb/production-archives"]
 
 # Add files
 ADD run.sh /run.sh
 ADD default.properties.tpl /opt/nuodb/etc/default.properties.tpl
 ADD webapp.properties.tpl /opt/nuodb/etc/webapp.properties.tpl
+ADD nuodb-rest-api.yml.tpl /opt/nuodb/etc/nuodb-rest-api.yml.tpl
 
 RUN chmod +x /run.sh
 
@@ -43,8 +42,35 @@ EXPOSE 48006
 # For admin database
 EXPOSE 48007
 EXPOSE 48008
-# Webconsole
+# for additional databases
 EXPOSE 48009
+EXPOSE 48010
+EXPOSE 48011
+EXPOSE 48012
+EXPOSE 48013
+EXPOSE 48014
+EXPOSE 48015
+EXPOSE 48016
+EXPOSE 48017
+EXPOSE 48018
+EXPOSE 48019
+EXPOSE 48020
+EXPOSE 48021
+EXPOSE 48022
+EXPOSE 48023
+EXPOSE 48024
+EXPOSE 48025
+EXPOSE 48026
+EXPOSE 48027
+EXPOSE 48028
+EXPOSE 48029
+EXPOSE 48030
+
+# webconsole
+EXPOSE 48080
+
+# autoconsole
+EXPOSE 8888
+EXPOSE 8889
 
 CMD /run.sh 
-

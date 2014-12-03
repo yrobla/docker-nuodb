@@ -11,17 +11,16 @@ Nuodb needs some open ports:
 ### Mandatory
 
 - `48004`: broker
-- `48005`: SM for your database
-- `48006`: TE for your database
+- `48005`: SM for nuodb_system
+- `48006`: TE for nuodb_system
 
 Except if you set `AUTOMATION` to `false`
 
-- `48007`: SM for `nuodb_system` database
-- `48008`: TE for `nuodb_system` database
+- `48007..48030`: additional databases
 
 ### Optional
 
-- `48009`: Nuodb web console
+- `48080`: Nuodb web console
 
 Usage
 -----

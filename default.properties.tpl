@@ -28,6 +28,7 @@
 
 # A flag specifying whether this agent should be run as a connection broker
 broker = ${BROKER}
+peer = NUODB_PEERS
 
 # The name used to identify the domain that this agent is a part of 
 domain = ${DOMAIN_USER}
@@ -155,5 +156,6 @@ singleHostDbRestart = true
 # Example: hostTags = tag1 = val, tag2=v2  
 #hostTags =
 
+enableSystemDatabase = true
 # the port for the webapp
 webapp.port = 48009

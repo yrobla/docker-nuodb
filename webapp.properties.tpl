@@ -1,5 +1,5 @@
 # the port for the webapp
-webapp.port = 48009
+webapp.port = 48080
 webapp.appWar = nuowebapp.war
 webapp.wsWar = nuowebservice.war
 domain.broker = ${HOST}
